@@ -22,10 +22,10 @@
                             @foreach ($movies as $movie)
                                 <tr>
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category->name }}</td>
+                                    <td>{{ $movie->category_name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
-                                    <td>{{ $movie->ratings->count() }}</td>
+                                    <td>{{ number_format($movie->ratings, 2) }}</td>
+                                    <td>{{ $movie->ratings_count }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
