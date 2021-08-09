@@ -8,15 +8,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::withAvg('ratings', 'rating')
-            ->withCount('ratings')
-            ->orderBy('ratings_avg_rating', 'desc')
-            ->addSelect([
-                'category_name' => \App\Models\Category::select('name')
-                    ->whereColumn('category_id', 'categories.id')
-            ])
-            ->limit(100)
-            ->get();
+        $movies = Movie::all()->sortByDesc(function($movie) {
+            return $movie->ratings->avg('rating');
+        })->take(100);
 
         return view('home', compact('movies'));
     }
