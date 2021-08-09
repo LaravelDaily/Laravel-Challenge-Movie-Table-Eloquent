@@ -18,6 +18,8 @@ class CreateRatingsTable extends Migration
             $table->unsignedBigInteger('movie_id');
             $table->integer('rating');
             $table->timestamps();
+
+            $table->foreign('movie_id')->references('id')->on('movies');
         });
     }
 
