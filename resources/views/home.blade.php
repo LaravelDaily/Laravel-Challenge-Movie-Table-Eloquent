@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('TOP 100 Movies') }}</div>
+                <div class="card-header">{{ __('TOP 100 Movies') }}<br/>
+                    <small>by Gergely Csermely from Hungary</small>
+                </div>
 
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -22,10 +24,10 @@
                             @foreach ($movies as $movie)
                                 <tr>
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category->name }}</td>
+                                    <td>{{ $movie->category_name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
-                                    <td>{{ $movie->ratings->count() }}</td>
+                                    <td>{{ number_format($movie->ratings_avg, 2) }}</td>
+                                    <td>{{ $movie->ratings_count }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
