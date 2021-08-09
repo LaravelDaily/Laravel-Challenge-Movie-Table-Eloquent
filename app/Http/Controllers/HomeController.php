@@ -11,6 +11,7 @@ class HomeController extends Controller
         $movies = Movie::select('category_id', 'title', 'release_year')
             ->withCategory()
             ->withRatings(true)
+            ->latest('ratings_avg')
             ->take(100)->get();
 
         return view('home', compact('movies'));

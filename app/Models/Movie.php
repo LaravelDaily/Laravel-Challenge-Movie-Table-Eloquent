@@ -28,7 +28,7 @@ class Movie extends Model
 
     public function scopeWithRatings($builder, bool $withCount = null)
     {
-        return $builder->withAvg('ratings', 'rating')
+        return $builder->withAvg('ratings as ratings_avg', 'rating')
             ->when($withCount, fn ($q) => $q->withCount('ratings'));
     }
 }
