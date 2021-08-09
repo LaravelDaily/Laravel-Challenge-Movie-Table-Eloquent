@@ -10,9 +10,7 @@ class HomeController extends Controller
     {
         $movies = Movie::with(['category' => function($builder) {
             return $builder->select('id', 'name');
-        }])->withAvg('ratings', 'rating')->withCount('ratings')->take(100)->get(['title', 'release_year'])->sortByDesc(function($movie) {
-            return $movie->ratings_avg_rating;
-        });
+        }])->withAvg('ratings', 'rating')->withCount('ratings')->take(100)->get(['title', 'release_year'])->sortByDesc('ratings_avg_rating');
 
         return view('home', compact('movies'));
     }
