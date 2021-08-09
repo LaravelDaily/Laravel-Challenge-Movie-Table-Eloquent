@@ -9,6 +9,7 @@ class Movie extends Model
 {
     use HasFactory;
 
+    protected $with=['category'];
     protected $fillable = ['category_id', 'title', 'release_year'];
 
     public function ratings()
@@ -20,4 +21,5 @@ class Movie extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
 }
