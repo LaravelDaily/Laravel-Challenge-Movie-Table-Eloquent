@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use DateTime;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +26,19 @@ class Movie extends Model
     public static function topByRating()
     {
         return self::with('category')->orderByDesc('rating');
+    }
+
+    public function updateRatingsCache()
+    {
+        $this->rating = round($this->ratings->avg('rating'), 2);
+        $this->rating_count = $this->ratings->count();
+    }
+
+    public static function updateAllRatingsCache(DateTimeInterface $since)
+    {
+        foreach(Movie::where('updated_at', '<=', $since)->cursor() as $movie) {
+            $movie->updateRatingsCache();
+            $movie->save();
+        }
     }
 }
