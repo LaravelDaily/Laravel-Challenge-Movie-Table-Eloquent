@@ -20,4 +20,15 @@ class Movie extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scopeWithCategory($builder)
+    {
+        return $builder->with(['category' => fn ($q) => $q->select('name', 'id')]);
+    }
+
+    public function scopeWithRatings($builder, bool $withCount = null)
+    {
+        return $builder->withAvg('ratings as ratings_avg', 'rating')
+            ->when($withCount, fn ($q) => $q->withCount('ratings'));
+    }
 }
