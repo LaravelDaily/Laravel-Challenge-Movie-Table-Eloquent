@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('TOP 100 Movies') }}<br/>
-                    <small>by Gergely Csermely from Hungary</small>
+                    <small>by Gergely Csermely from Hungary with Eloquent</small>
                 </div>
 
                 <div class="card-body">
@@ -24,9 +24,9 @@
                             @foreach ($movies as $movie)
                                 <tr>
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category_name }}</td>
+                                    <td>{{ $movie->category->name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings_avg, 2) }}</td>
+                                    <td>{{ number_format($movie->ratings_avg_rating, 2) }}</td>
                                     <td>{{ $movie->ratings_count }}</td>
                                 </tr>
                             @endforeach
