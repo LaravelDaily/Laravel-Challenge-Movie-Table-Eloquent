@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Movie;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
