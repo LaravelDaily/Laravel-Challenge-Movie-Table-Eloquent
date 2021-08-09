@@ -20,13 +20,13 @@
                         </thead>
                         <tbody>
                             @foreach ($movies as $movie)
-                                <tr>
-                                    <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category->name }}</td>
-                                    <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
-                                    <td>{{ $movie->ratings->count() }}</td>
-                                </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
+                                <td>{{ $movie->category->name }}</td>
+                                <td>{{ $movie->release_year }}</td>
+                                <td>{{ number_format($movie->ratings_avg_rating, 2) }}</td>
+                                <td>{{ $movie->ratings_count }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
