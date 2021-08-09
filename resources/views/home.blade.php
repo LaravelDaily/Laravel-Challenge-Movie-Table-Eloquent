@@ -19,14 +19,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($movies as $movie)
+                            @foreach ($movies as $key=>$movie)
                                 <tr>
-                                    <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie->category->name }}</td>
-                                    <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
-                                    <td>{{ $movie->ratings->count() }}</td>
-                                </tr>
+                                    <td>{{ $loop->iteration }}. {{ $movie['title'] }}</td>
+                                    <td>{{ $movie['category_name'] }}</td>
+                                    <td>{{ $movie['release_year'] }}</td>
+                                    <td>{{ $movie['avg_rating'] }}</td>
+                                    <td>{{ $movie['count_rating'] }}</td>
+                                </tr>   
                             @endforeach
                         </tbody>
                     </table>
