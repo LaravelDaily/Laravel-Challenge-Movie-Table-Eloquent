@@ -12,7 +12,8 @@ class HomeController extends Controller
             ->take(100)
             ->withCount('ratings')
             ->withAvg('ratings', 'rating')
-            ->get();
+            ->get()
+            ->sortByDesc('ratings_avg_rating');
 
         return view('home', compact('movies'));
     }
