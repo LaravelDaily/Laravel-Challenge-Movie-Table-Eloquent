@@ -21,7 +21,7 @@
                         <tbody>
                             @foreach ($movies as $movie)
                                 <tr>
-                                    <td>{{ $movie->title }}</td>
+                                    <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
                                     <td>{{ $movie->name }}</td>
                                     <td>{{ $movie->release_year }}</td>
                                     <td>{{ number_format($movie->rating, 2) }}</td>
