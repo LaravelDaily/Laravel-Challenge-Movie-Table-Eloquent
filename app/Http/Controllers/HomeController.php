@@ -30,7 +30,7 @@ class HomeController extends Controller
             ->join('categories', 'categories.id', 'movies.category_id') // belongsTo relationship can be traded for a simple inner join since category_id is not nullable. If category_id was nullable, a left join would be needed instead.
             ->withCount('ratings')
             ->withAggregate('ratings as ratings_avg', 'round(avg(rating), 2)')
-            ->orderBy('rating')
+            ->orderByDesc('ratings_avg')
             ->limit(100)
             ->cursor() // return result as lazy collection.
             ->all();   // go from lazy collection to array.
@@ -62,6 +62,7 @@ class HomeController extends Controller
             ->selectSub($aggregate_avg, 'ratings_avg')     // here $aggregate_avg could be replaced with a Closure. I find this more readable.
             ->from('movies', 'm')
             ->join('categories as c', 'c.id', 'm.category_id')
+            ->orderByDesc('ratings_avg')
             ->limit(100)
             ->cursor() // return result as lazy collection.
             ->all();   // go from lazy collection to array.
