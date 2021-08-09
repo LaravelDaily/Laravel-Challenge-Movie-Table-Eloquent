@@ -14,15 +14,25 @@ class HomeController extends Controller
             return $movie->ratings->avg('rating');
         })->take(100); */
 
-        $movies = DB::select("
-            select m.title, c.name as category_name, m.release_year, v.ratings_avg, v.ratings_count
-    from movies as m
-      inner join categories as c on c.id=m.category_id
-      left outer join (
-        select movie_id, avg(rating) as ratings_avg, count(id) as ratings_count from ratings group by movie_id
-        ) as v on v.movie_id=m.id
-order by v.ratings_avg desc limit 100");
+        /*        $movies = DB::select("
+                    select m.title, c.name as category_name, m.release_year, v.ratings_avg, v.ratings_count
+            from movies as m
+              inner join categories as c on c.id=m.category_id
+              left outer join (
+                select movie_id, avg(rating) as ratings_avg, count(id) as ratings_count from ratings group by movie_id
+                ) as v on v.movie_id=m.id
+        order by v.ratings_avg desc limit 100");*/
+        //return view('home', compact('movies'));
 
-        return view('home', compact('movies'));
+        $movies = Movie::with('category')
+                    ->withCount('ratings')
+                    ->withAvg('ratings', 'rating')
+                    ->get()
+                    ->sortByDesc('ratings_avg_rating')
+                    ->take(100);
+
+        //dd($movies);
+
+        return view('home2', compact('movies'));
     }
 }
