@@ -2,6 +2,9 @@
 
 return [
 
+    // configure the number of highest ranked movies to show; i.e. Top 10
+    'highest_rated_movies_count' => env('APP_HIGHEST_RATED_MOVIES_COUNT', 100),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
