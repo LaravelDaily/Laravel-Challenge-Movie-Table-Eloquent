@@ -19,6 +19,8 @@ class CreateMoviesTable extends Migration
             $table->string('title');
             $table->integer('release_year');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
