@@ -21,7 +21,9 @@ class HomeController extends Controller
         
         // Changes made as pointed out by nipunTharuksha. Thanks nipunTharuksha. 
         // I got my wrong. I was whole loading the ratings that loaded 1050 models. 
-        // Now need to change view too. So I have made changes to my view as well
+        // Now need to change view too. So I have made changes to my view as well with these lines
+        // <td>{{ number_format($movie->ratings_avg_rating, 2) }}</td>
+        // <td>{{ $movie->ratings_count }}</td>
         $movies = Movie::with('category')
                 ->withAvg('ratings','rating')
                 ->withCount('ratings')
