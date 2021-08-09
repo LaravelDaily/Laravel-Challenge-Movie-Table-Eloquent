@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all()->sortByDesc(function($movie) {
-            return $movie->ratings->avg('rating');
-        })->take(100);
+        $movies = DB::table('ratings')
+            ->selectRaw('movie_id, title, release_year, categories.name as category_name, COUNT(rating) as votes, AVG(rating) as rating')
+            ->join('movies', 'ratings.movie_id', '=', 'movies.id')
+            ->join('categories', 'movies.category_id', '=', 'categories.id')
+            ->orderByDesc('rating')
+            ->groupBy('movie_id')
+            ->take(100)
+            ->get();
 
         return view('home', compact('movies'));
     }
