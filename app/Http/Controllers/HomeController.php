@@ -24,6 +24,8 @@ class HomeController extends Controller
                     'count_rating' => $q->count(),
                 ];
             })
+            ->sortByDesc("avg_rating")
+
             ->take(100);
         return view('home', compact('movies'));
     }
