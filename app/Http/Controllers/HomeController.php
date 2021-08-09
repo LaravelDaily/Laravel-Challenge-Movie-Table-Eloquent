@@ -14,7 +14,8 @@ class HomeController extends Controller
 
         $movies = Movie::with('category')
             ->withCount('ratings')->withAvg('ratings', 'rating')
-            ->limit(100)->get()->sortByDesc('ratings_avg_rating');
+            ->orderByDesc('ratings_avg_rating')
+            ->limit(100)->get();
 
         return view('home', compact('movies'));
     }
