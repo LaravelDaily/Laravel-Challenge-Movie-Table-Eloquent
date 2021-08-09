@@ -24,7 +24,7 @@
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
                                     <td>{{ $movie->category->name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
+                                    <td>{{ number_format($movie->average_rating, 2) }}</td>
                                     <td>{{ $movie->ratings->count() }}</td>
                                 </tr>
                             @endforeach
