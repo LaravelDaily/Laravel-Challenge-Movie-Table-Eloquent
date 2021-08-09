@@ -9,17 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        /**
-         * Original Query
-         *  */ 
-        //$movies = Movie::all()->sortByDesc(function($movie) {
-        //    return $movie->ratings->avg('rating');
-        //})->take(100);
-        $movies = Movie::join('ratings','movies.id','=','ratings.movie_id')
-                        ->join('categories','movies.category_id','=','categories.id')
-                        ->select('movies.*','categories.*',DB::raw('AVG(ratings.rating) as avg_rating,COUNT(*) as Votes'))
+        
+        $movies = Movie::with('category')
+                        ->withAvg('ratings','rating')
+                        ->withCount('ratings')
                         ->groupBy('movies.id')
-                        ->orderByRaw('avg(ratings.rating) DESC')->take(100)->get();
+                        ->orderByDesc('ratings_avg_rating')->take(100)->get();
 
         return view('home', compact('movies'));
     }

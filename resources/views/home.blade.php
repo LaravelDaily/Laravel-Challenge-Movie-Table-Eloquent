@@ -21,11 +21,12 @@
                         <tbody>
                             @foreach ($movies as $movie)
                                 <tr>
-                                    <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
-                                    <td>{{ $movie['name']}}</td> 
-                                    <td>{{ $movie['release_year'] }}</td>
-                                    <td>{{$movie['avg_rating'] }}</td> 
-                                    <td>{{ $movie['Votes'] }}</td>
+                                    
+                                    <td>{{ $loop->iteration }}. {{ $movie->title}}</td>
+                                    <td>{{ $movie->category->name}}</td>
+                                    <td>{{ $movie->release_year}}</td>
+                                    <td>{{ $movie->ratings_avg_rating}}</td>
+                                    <td>{{ $movie->ratings_count}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
