@@ -12,9 +12,7 @@ class HomeController extends Controller
 
         $movies = Movie::query() //Using query for the next functions to be indented
             ->select('id','category_id','title','release_year')
-            ->with('category',function($query){
-                $query->select('id','name');
-            })
+            ->with('category',fn($query) => $query->select('id','name'))
             ->withAvg('ratings','rating')
             ->withCount('ratings')
             ->take(100)
