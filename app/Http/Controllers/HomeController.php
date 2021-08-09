@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
+use App\Models\Rating;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all()->sortByDesc(function($movie) {
-            return $movie->ratings->avg('rating');
-        })->take(100);
+       $movies = Rating::byMovie();
 
         return view('home', compact('movies'));
     }
