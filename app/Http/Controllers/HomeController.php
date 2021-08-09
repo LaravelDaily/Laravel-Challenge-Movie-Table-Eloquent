@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index()
     {
         $movies = Movie::query()
-            ->with('ratings', 'category')
+            ->with('category')
             ->withAvg('ratings', 'rating')
             ->withCount('ratings')
             ->orderBy('ratings_avg_rating', 'desc')
