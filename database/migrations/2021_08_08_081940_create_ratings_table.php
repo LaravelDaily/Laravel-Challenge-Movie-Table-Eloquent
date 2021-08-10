@@ -15,9 +15,10 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('movie_id');
             $table->integer('rating');
             $table->timestamps();
+
+            $table->foreignId('movie_id')->references('id')->on('movies');
         });
     }
 
