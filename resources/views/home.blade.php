@@ -18,16 +18,28 @@
                                 <th>Votes</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {{--<tbody>
                             @foreach ($movies as $movie)
                                 <tr>
                                     <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
                                     <td>{{ $movie->category->name }}</td>
                                     <td>{{ $movie->release_year }}</td>
-                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}</td>
+                                    <td>{{ number_format($movie->ratings->avg('rating'), 2) }}
+                                    </td>
                                     <td>{{ $movie->ratings->count() }}</td>
                                 </tr>
                             @endforeach
+                        </tbody>--}}
+                        <tbody>
+                        @foreach ($movies as $movie)
+                            <tr>
+                                <td>{{ $loop->iteration }}. {{ $movie->title }}</td>
+                                <td>{{ $movie->category_name }}</td>
+                                <td>{{ $movie->release_year }}</td>
+                                <td>{{ number_format($movie->average, 2) }}</td>
+                                <td>{{ $movie->count }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
