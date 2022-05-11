@@ -20,3 +20,7 @@ If you have any questions, or suggestions for the future challenges, please open
 
 Good luck!
 
+## Checklist
+
+[x] Using facade DB
+[ ] Using eloquent
