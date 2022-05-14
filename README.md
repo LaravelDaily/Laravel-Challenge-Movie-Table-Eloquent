@@ -22,5 +22,10 @@ Good luck!
 
 ## Checklist
 
-[x] Using facade DB
-[ ] Using eloquent
+- [x] Using facade DB
+- [x] Using eloquent
+
+## Results
+
+![Using Facade DB](facade_db.png "Using Facade DB")
+![Using Eloquent](eloquent.png "Using Eloquent")

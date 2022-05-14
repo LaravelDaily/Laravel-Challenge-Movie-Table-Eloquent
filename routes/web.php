@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');
+
+Route::get('/ORM', [\App\Http\Controllers\HomeController::class, 'indexORM'])
+->name('homeORM');

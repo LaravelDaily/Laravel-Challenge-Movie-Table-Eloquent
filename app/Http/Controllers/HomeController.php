@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -19,5 +20,17 @@ class HomeController extends Controller
             ->get();
 
         return view('home', compact('movies'));
+    }
+
+    public function indexORM()
+    {
+        $movies = Movie::withAvg('ratings', 'rating')
+            ->withCount('ratings')
+            ->with('category')
+            ->orderByDesc('ratings_avg_rating')
+            ->take(100)
+            ->get();
+
+        return view('homeORM', compact('movies'));
     }
 }
