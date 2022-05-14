@@ -20,3 +20,12 @@ If you have any questions, or suggestions for the future challenges, please open
 
 Good luck!
 
+## Checklist
+
+- [x] Using facade DB
+- [x] Using eloquent
+
+## Results
+
+![Using Facade DB](facade_db.png "Using Facade DB")
+![Using Eloquent](eloquent.png "Using Eloquent")

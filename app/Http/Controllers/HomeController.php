@@ -3,15 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all()->sortByDesc(function($movie) {
-            return $movie->ratings->avg('rating');
-        })->take(100);
+        $movies = DB::table('movies')
+            ->select('movies.*', 'categories.name as category_name')
+            ->selectRaw('COUNT(rating) as ratings_count, AVG(rating) as ratings_avg_rating')
+            ->join('categories', 'movies.category_id', '=', 'categories.id')
+            ->leftJoin('ratings', 'movies.id', '=', 'ratings.movie_id')
+            ->groupBy('movies.id')
+            ->orderByDesc('ratings_avg_rating')
+            ->take(100)
+            ->get();
 
         return view('home', compact('movies'));
+    }
+
+    public function indexORM()
+    {
+        $movies = Movie::withAvg('ratings', 'rating')
+            ->withCount('ratings')
+            ->with('category')
+            ->orderByDesc('ratings_avg_rating')
+            ->take(100)
+            ->get();
+
+        return view('homeORM', compact('movies'));
     }
 }
