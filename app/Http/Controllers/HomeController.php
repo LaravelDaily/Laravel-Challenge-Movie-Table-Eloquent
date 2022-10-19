@@ -8,10 +8,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all()->sortByDesc(function($movie) {
-            return $movie->ratings->avg('rating');
-        })->take(100);
-
+        $movies = Movie::withAvg('ratings', 'rating')
+            ->withCount('ratings')
+            ->orderBy('ratings_avg_rating', 'desc')
+            ->take(100)->get();
+        $movies->load('category');
         return view('home', compact('movies'));
     }
 }
