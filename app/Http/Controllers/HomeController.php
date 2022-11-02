@@ -8,9 +8,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all()->sortByDesc(function($movie) {
-            return $movie->ratings->avg('rating');
-        })->take(100);
+        $movies = Movie::query()
+            ->with(['ratings', 'category'])
+            ->get()
+            ->sortByDesc(function($movie) {
+                return $movie->ratings->avg('rating');
+            })
+            ->take(100);
 
         return view('home', compact('movies'));
     }
